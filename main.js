@@ -1,25 +1,40 @@
 const express = require('express');
 const formidable = require('formidable');
+let bodyParser = require('body-parser');
+let jsonParser = bodyParser.json();
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+const DBUrl = 'mongodb://localhost/learn';
 const app = express();
 const port = 3750;
 const http = require('http').Server(app);
-const Gallery = require("./Gallery");
+const collectionType = {
+    GALLERY:'gallery',
+    CONTENT:'content'
+};
 const MongoClient = require("mongodb").MongoClient;
-let gallery = new Gallery();
+let sd = require('silly-datetime');
+
 //allow custom header and CORS
 app.all('*',function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
     res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
 
-    if (req.method == 'OPTIONS') {
-        res.send(200); /让options请求快速返回/
+    if (req.method === 'OPTIONS') {
+        res.send(200);
     }
     else {
         next();
     }
 });
-
+app.post('/create',jsonParser,(req,res)=>{
+    if (!req.body) return res.sendStatus(400);
+    res.send(JSON.stringify({newName:req.body.name,time:sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss')}));
+    presever(MongoClient,DBUrl,collectionType.GALLERY,{newName:req.body.name,time:sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss')});
+});
+app.get('/list/gallery',jsonParser,(req,res)=>{
+    res.send(JSON.stringify(getList(MongoClient,DBUrl,collectionType.GALLERY)));
+});
 app.post('/',(req,res)=>{
     res.send('Got a POST request');
     let form = new formidable.IncomingForm();
@@ -51,7 +66,7 @@ app.post('/',(req,res)=>{
                             Longitude:8.702244
                         },
                     };
-                    gallery.presever(MongoClient,DBUrl,info);
+                    //gallery.presever(MongoClient,DBUrl,,info);
                 }
             });
 
@@ -64,5 +79,50 @@ app.post('/',(req,res)=>{
 });
 
 http.listen(port, function(){
-    console.log('listening on *:3030');
+    console.log('listening on *:3750');
 });
+function getList(mongoclient, dburl, type) {
+    let list = [];
+    mongoclient.connect(dburl,{useNewUrlParser:true},(err,db)=>{
+        if (err) throw err;
+        console.log("数据库连接成功！");
+        let dbo = db.db("learn");
+        dbo.collection(type).find({}).toArray((err,result)=>{
+            if (err) throw err;
+            console.log(result);
+            db.close();
+            list = result;
+        });
+    });
+    return list;
+}
+function presever(mongoclient,dburl,type,info){
+    mongoclient.connect(dburl,{useNewUrlParser:true},(err,db)=>{
+        if (err) throw err;
+        console.log("数据库连接成功！");
+        let dbo = db.db("learn");
+        dbo.collection(type).insertOne(info,(err,res)=>{
+            if (err) throw err;
+            console.log("文档插入成功！");
+        });
+        let whereStr = {name:info.name};
+        dbo.collection(type).find(whereStr).toArray((err,result)=>{
+            if (err) throw err;
+            console.log(result);
+            db.close();
+        });
+    })
+}
+function remove(mongoclient,dburl,type,info){
+    mongoclient.connect(dburl,{useNewUrlParser:true},(err,db)=>{
+        if (err) throw err;
+        console.log("数据库连接成功！");
+        let dbo = db.db("learn");
+        let whereStr = {name:info.name};
+        dbo.collection(type).deleteMany(whereStr,(err,obj)=>{
+            if (err) throw err;
+            console.log(obj.result.n+" 条文档被删除");
+            db.close();
+        })
+    })
+}
