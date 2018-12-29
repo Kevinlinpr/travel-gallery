@@ -13,7 +13,6 @@ const collectionType = {
 };
 const MongoClient = require("mongodb").MongoClient;
 let sd = require('silly-datetime');
-
 //allow custom header and CORS
 app.all('*',function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -29,11 +28,23 @@ app.all('*',function (req, res, next) {
 });
 app.post('/create',jsonParser,(req,res)=>{
     if (!req.body) return res.sendStatus(400);
-    res.send(JSON.stringify({newName:req.body.name,time:sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss')}));
-    presever(MongoClient,DBUrl,collectionType.GALLERY,{newName:req.body.name,time:sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss')});
+    res.send(JSON.stringify({name:req.body.name,time:sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss')}));
+    presever(MongoClient,DBUrl,collectionType.GALLERY,{name:req.body.name,time:sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss')});
+});
+app.post('/delete',jsonParser,(req,res)=>{
+    if (!req.body) return res.sendStatus(400);
+    console.log(req.body);
+    res.send(JSON.stringify(req.body));
+    remove(MongoClient,DBUrl,collectionType.GALLERY,req.body);
 });
 app.get('/list/gallery',jsonParser,(req,res)=>{
-    res.send(JSON.stringify(getList(MongoClient,DBUrl,collectionType.GALLERY)));
+    //res.send(JSON.stringify(getList(MongoClient,DBUrl,collectionType.GALLERY)));
+    getList(MongoClient,DBUrl,collectionType.GALLERY,function (x) {
+        console.log('===start===');
+        console.log(x);
+        console.log('===end===');
+        res.send(JSON.stringify(x));
+    })
 });
 app.post('/',(req,res)=>{
     res.send('Got a POST request');
@@ -81,20 +92,18 @@ app.post('/',(req,res)=>{
 http.listen(port, function(){
     console.log('listening on *:3750');
 });
-function getList(mongoclient, dburl, type) {
-    let list = [];
+function getList(mongoclient, dburl, type,callback) {
     mongoclient.connect(dburl,{useNewUrlParser:true},(err,db)=>{
         if (err) throw err;
         console.log("数据库连接成功！");
         let dbo = db.db("learn");
         dbo.collection(type).find({}).toArray((err,result)=>{
             if (err) throw err;
-            console.log(result);
+            //console.log(result);
             db.close();
-            list = result;
+            callback(result);
         });
     });
-    return list;
 }
 function presever(mongoclient,dburl,type,info){
     mongoclient.connect(dburl,{useNewUrlParser:true},(err,db)=>{
