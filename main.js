@@ -12,6 +12,7 @@ const collectionType = {
     CONTENT:'content'
 };
 const MongoClient = require("mongodb").MongoClient;
+let objectId = require('mongodb').ObjectId;
 let sd = require('silly-datetime');
 //allow custom header and CORS
 app.all('*',function (req, res, next) {
@@ -41,6 +42,14 @@ app.get('/list/gallery',jsonParser,(req,res)=>{
     //res.send(JSON.stringify(getList(MongoClient,DBUrl,collectionType.GALLERY)));
     getList(MongoClient,DBUrl,collectionType.GALLERY,function (x) {
         console.log('===start===');
+        console.log(x);
+        console.log('===end===');
+        res.send(JSON.stringify(x));
+    })
+});
+app.post('/gallery/room/info',jsonParser,(req,res)=>{
+    getInfo({_id:req.body._id},MongoClient,DBUrl,collectionType.GALLERY,function (x) {
+        console.log('===find===');
         console.log(x);
         console.log('===end===');
         res.send(JSON.stringify(x));
@@ -98,6 +107,20 @@ function getList(mongoclient, dburl, type,callback) {
         console.log("数据库连接成功！");
         let dbo = db.db("learn");
         dbo.collection(type).find({}).toArray((err,result)=>{
+            if (err) throw err;
+            //console.log(result);
+            db.close();
+            callback(result);
+        });
+    });
+}
+function getInfo(find,mongoclient, dburl, type, callback) {
+    mongoclient.connect(dburl,{useNewUrlParser:true},(err,db)=>{
+        if (err) throw err;
+        console.log("数据库连接成功！");
+        let dbo = db.db("learn");
+        let whereStr = {_id:objectId(find._id)};
+        dbo.collection(type).find(whereStr).toArray((err,result)=>{
             if (err) throw err;
             //console.log(result);
             db.close();
