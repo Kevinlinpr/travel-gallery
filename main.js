@@ -78,7 +78,7 @@ app.post('/upload',(req,res)=>{
                 if(err){console.log(err);}
                 else{fs.unlink(oldpath,function(){});
                     let downloadpath = 'http://149.28.202.19:3300/download/' + d;
-                    res.send(JSON.stringify({}))
+                    res.send(JSON.stringify({imgUrl:downloadpath}));
                     //gallery.presever(MongoClient,DBUrl,,info);
                 }
             });
