@@ -1,6 +1,9 @@
 const express = require('express');
 const formidable = require('formidable');
 let bodyParser = require('body-parser');
+const crypto = require('crypto');
+const path = require('path');
+const fs = require('fs');
 let jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 const DBUrl = 'mongodb://localhost/learn';
