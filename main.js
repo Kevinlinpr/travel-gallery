@@ -55,7 +55,7 @@ app.post('/gallery/room/info',jsonParser,(req,res)=>{
         res.send(JSON.stringify(x));
     })
 });
-app.post('/',(req,res)=>{
+app.post('/upload',(req,res)=>{
     res.send('Got a POST request');
     let form = new formidable.IncomingForm();
     form.uploadDir = "tmpDir";
@@ -78,14 +78,7 @@ app.post('/',(req,res)=>{
                 if(err){console.log(err);}
                 else{fs.unlink(oldpath,function(){});
                     let downloadpath = 'http://149.28.202.19:3300/download/' + d;
-                    let info = {
-                        name:content,
-                        path:downloadpath,
-                        coordinate:{
-                            Latitude:18.604601,
-                            Longitude:8.702244
-                        },
-                    };
+                    res.send(JSON.stringify({}))
                     //gallery.presever(MongoClient,DBUrl,,info);
                 }
             });
