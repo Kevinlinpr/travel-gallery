@@ -59,7 +59,6 @@ app.post('/gallery/room/info',jsonParser,(req,res)=>{
     })
 });
 app.post('/upload',(req,res)=>{
-    res.send('Got a POST request');
     let form = new formidable.IncomingForm();
     form.uploadDir = "tmpDir";
     form.keepExtensions = true;
