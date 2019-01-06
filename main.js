@@ -36,7 +36,7 @@ app.post('/uploadImgInfo',jsonParser,(req,res)=>{
     res.send(JSON.stringify({imgUrl:req.body.imgUrl,
         longitude:req.body.longitude,
         latitude:req.body.latitude}));
-    insertImgInfoIntoGallery(MongoClient,DBUrl,objectId(req.body._id),
+    insertImgInfoIntoGallery(MongoClient,DBUrl,req.body._id,
         {imgUrl:req.body.imgUrl,
         longitude:req.body.longitude,
         latitude:req.body.latitude});
