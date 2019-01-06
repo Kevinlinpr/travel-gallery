@@ -31,6 +31,10 @@ app.all('*',function (req, res, next) {
         next();
     }
 });
+app.post('/uploadImgInfo',jsonParser,(req,res)=>{
+    if (!req.body) return res.sendStatus(400);
+    insertImgInfoIntoGallery(MongoClient,DBUrl,objectId(req.body._id),req.body);
+});
 app.post('/create',jsonParser,(req,res)=>{
     if (!req.body) return res.sendStatus(400);
     res.send(JSON.stringify({name:req.body.name,time:sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss')}));
@@ -148,6 +152,37 @@ function remove(mongoclient,dburl,type,info){
         let dbo = db.db("learn");
         let whereStr = {name:info.name};
         dbo.collection(type).deleteMany(whereStr,(err,obj)=>{
+            if (err) throw err;
+            console.log(obj.result.n+" 条文档被删除");
+            db.close();
+        })
+    });
+    removeAllImgInfoFromGallery(mongoclient,dburl,objectId(info._id));
+}
+function insertImgInfoIntoGallery(mongoclient, dburl, gallery, info) {
+    mongoclient.connect(dburl,{useNewUrlParser:true},(err,db)=>{
+        if (err) throw err;
+        console.log("数据库连接成功！");
+        let dbo = db.db("learn");
+        dbo.collection(gallery).insertOne(info,(err,res)=>{
+            if (err) throw err;
+            console.log("文档插入成功！");
+        });
+        let whereStr = {name:info.name};
+        dbo.collection(gallery).find(whereStr).toArray((err,result)=>{
+            if (err) throw err;
+            console.log(result);
+            db.close();
+        });
+    })
+}
+function removeAllImgInfoFromGallery(mongoclient, dburl, gallery) {
+    mongoclient.connect(dburl,{useNewUrlParser:true},(err,db)=>{
+        if (err) throw err;
+        console.log("数据库连接成功！");
+        let dbo = db.db("learn");
+        let whereStr = {};
+        dbo.collection(gallery).deleteMany(whereStr,(err,obj)=>{
             if (err) throw err;
             console.log(obj.result.n+" 条文档被删除");
             db.close();

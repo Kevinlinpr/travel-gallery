@@ -19,8 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="81" selection-start-line="24" selection-start-column="81" selection-end-line="24" selection-end-column="81" />
+            <state relative-caret-position="-354">
+              <caret line="42" column="42" lean-forward="true" selection-start-line="42" selection-start-column="42" selection-end-line="42" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -113,7 +113,7 @@
       <workItem from="1545756996249" duration="1821000" />
       <workItem from="1545760797440" duration="11827000" />
       <workItem from="1546013783909" duration="14961000" />
-      <workItem from="1546743083442" duration="25000" />
+      <workItem from="1546743083442" duration="2358000" />
     </task>
     <task id="LOCAL-00001" summary="remove Gallery class">
       <created>1545801750001</created>
@@ -178,11 +178,25 @@
       <option name="project" value="LOCAL" />
       <updated>1546688723072</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="set static file service">
+      <created>1546743144895</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1546743144895</updated>
+    </task>
+    <task id="LOCAL-00011" summary="change port">
+      <created>1546743437591</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1546743437591</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42550000" />
+    <option name="totallyTimeSpent" value="44883000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -218,7 +232,9 @@
     <MESSAGE value="finish forwarding gallery room and back to gallery lobby from mongodb." />
     <MESSAGE value="add crypto path fs" />
     <MESSAGE value="test on server" />
-    <option name="LAST_COMMIT_MESSAGE" value="test on server" />
+    <MESSAGE value="set static file service" />
+    <MESSAGE value="change port" />
+    <option name="LAST_COMMIT_MESSAGE" value="change port" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/DBoperator.js" />
@@ -226,8 +242,8 @@
     <entry file="file://$PROJECT_DIR$/Gallery.js" />
     <entry file="file://$PROJECT_DIR$/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="81" selection-start-line="24" selection-start-column="81" selection-end-line="24" selection-end-column="81" />
+        <state relative-caret-position="-354">
+          <caret line="42" column="42" lean-forward="true" selection-start-line="42" selection-start-column="42" selection-end-line="42" selection-end-column="42" />
         </state>
       </provider>
     </entry>
