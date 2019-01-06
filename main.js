@@ -33,7 +33,13 @@ app.all('*',function (req, res, next) {
 });
 app.post('/uploadImgInfo',jsonParser,(req,res)=>{
     if (!req.body) return res.sendStatus(400);
-    insertImgInfoIntoGallery(MongoClient,DBUrl,objectId(req.body._id),req.body);
+    res.send(JSON.stringify({imgUrl:req.body.imgUrl,
+        longitude:req.body.longitude,
+        latitude:req.body.latitude}));
+    insertImgInfoIntoGallery(MongoClient,DBUrl,objectId(req.body._id),
+        {imgUrl:req.body.imgUrl,
+        longitude:req.body.longitude,
+        latitude:req.body.latitude});
 });
 app.post('/create',jsonParser,(req,res)=>{
     if (!req.body) return res.sendStatus(400);
