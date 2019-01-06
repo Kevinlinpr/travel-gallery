@@ -17,6 +17,7 @@ const collectionType = {
 const MongoClient = require("mongodb").MongoClient;
 let objectId = require('mongodb').ObjectId;
 let sd = require('silly-datetime');
+app.use("/download",express.static('./uploadfile'));
 //allow custom header and CORS
 app.all('*',function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
