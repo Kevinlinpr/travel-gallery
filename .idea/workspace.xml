@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a6b667ea-0fde-4672-8756-b3f006155d94" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
-    </list>
+    <list default="true" id="a6b667ea-0fde-4672-8756-b3f006155d94" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -19,8 +16,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="184" column="64" selection-start-line="184" selection-start-column="57" selection-end-line="184" selection-end-column="64" />
+            <state relative-caret-position="576">
+              <caret line="196" column="1" lean-forward="true" selection-start-line="196" selection-start-column="1" selection-end-line="196" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -113,7 +110,7 @@
       <workItem from="1545756996249" duration="1821000" />
       <workItem from="1545760797440" duration="11827000" />
       <workItem from="1546013783909" duration="14961000" />
-      <workItem from="1546743083442" duration="3858000" />
+      <workItem from="1546743083442" duration="4324000" />
     </task>
     <task id="LOCAL-00001" summary="remove Gallery class">
       <created>1545801750001</created>
@@ -206,11 +203,18 @@
       <option name="project" value="LOCAL" />
       <updated>1546755000128</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="retrieve the data structure">
+      <created>1546755283046</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1546755283046</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46383000" />
+    <option name="totallyTimeSpent" value="46849000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -258,8 +262,8 @@
     <entry file="file://$PROJECT_DIR$/Gallery.js" />
     <entry file="file://$PROJECT_DIR$/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="184" column="64" selection-start-line="184" selection-start-column="57" selection-end-line="184" selection-end-column="64" />
+        <state relative-caret-position="576">
+          <caret line="196" column="1" lean-forward="true" selection-start-line="196" selection-start-column="1" selection-end-line="196" selection-end-column="1" />
         </state>
       </provider>
     </entry>
